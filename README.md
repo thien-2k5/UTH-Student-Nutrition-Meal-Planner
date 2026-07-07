@@ -5,7 +5,49 @@ Một ứng dụng web được xây dựng bằng Python (Flask), SQLite và Ja
 
 ---
 
-## 🌟 Tính Năng Nổi Bật
+## 🌐 Demo Trực Tuyến
+
+**Ứng dụng đã được triển khai lên Azure VM:**
+
+🔗 **[http://20.89.105.76:5001](http://20.89.105.76:5001)**
+
+- Chế độ sáng/tối: Nhấn biểu tượng mặt trăng ở góc trên bên phải
+- Tính BMI: Trang `/bmi`
+- Gợi ý thực đơn: Trang `/recommend`
+- Trò chuyện chatbot: Trang `/chat`
+- Kiến thức dinh dưỡng: Trang `/knowledge`
+
+---
+
+## 🚀 Hướng Dẫn Sử Dụng Nhanh
+
+### Cách 1: Chạy Trực Tiếp Trên Máy (Local Development)
+```bash
+# Clone dự án
+git clone <repository-url>
+cd UTH-Student-Nutrition-Meal-Planner
+
+# Cài đặt thư viện
+pip install -r requirements.txt
+
+# Khởi chạy ứng dụng
+python app.py
+
+# Truy cập http://localhost:5001
+```
+
+### Cách 2: Chạy Bằng Docker
+```bash
+# Xây dựng và chạy với Docker Compose
+docker compose up --build -d
+
+# Truy cập http://localhost:5001
+```
+
+### Cách 3: Truy Cập Demo Trên Azure
+Chuyển đến: **[http://20.89.105.76:5001](http://20.89.105.76:5001)**
+
+---
 
 - **Tính toán BMI & TDEE khoa học**: Ước tính chỉ số khối cơ thể (BMI) và tổng năng lượng tiêu thụ hàng ngày (TDEE) bằng phương trình Mifflin-St Jeor.
 - **Đề xuất thực đơn theo ngân sách ngày**: Thuật toán tự động tìm tổ hợp 4 bữa ăn (Sáng, Trưa, Tối, Phụ/Nước) phù hợp với ngân sách chỉ từ 40.000đ/ngày, đảm bảo cân đối đạm, tinh bột, chất béo, xơ và vitamin.
