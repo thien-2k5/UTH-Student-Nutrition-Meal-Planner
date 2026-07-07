@@ -83,7 +83,7 @@ project/
 
 ### Bước 1: Sao chép mã nguồn (Clone repository) hoặc di chuyển vào thư mục dự án
 ```bash
-cd /Users/thien/Documents/learn/TDTKDMST
+cd /Users/thien/Documents/learn/UTH-Student-Nutrition-Meal-Planner
 ```
 
 ### Bước 2: Tạo môi trường ảo và cài đặt thư viện
