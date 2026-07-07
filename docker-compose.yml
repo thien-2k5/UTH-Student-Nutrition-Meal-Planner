@@ -1,0 +1,18 @@
+services:
+  web:
+    build: .
+    container_name: uth-meal-planner
+    ports:
+      - "5001:5000"
+    volumes:
+      - db-data:/app/database
+    environment:
+      FLASK_RUN_HOST: 0.0.0.0
+      FLASK_RUN_PORT: 5000
+      DATABASE_URL: sqlite:////app/database/food.db
+      SECRET_KEY: uth_student_nutrition_secret_key_12345
+    command: sh -c "python database/seed.py && python app.py"
+    restart: unless-stopped
+
+volumes:
+  db-data:

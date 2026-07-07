@@ -1,11 +1,17 @@
 # pyrefly: ignore [missing-import]
+import sys
+from pathlib import Path
+
 import pytest
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 from app import create_app
-from database.db import db
-from models.food import Food
-from services.calculator import calculate_bmi, calculate_bmr, calculate_tdee
-from services.recommender import recommend_menu
-from services.chatbot import extract_parameters, get_rule_response
+from app.database import db
+from app.models.food import Food
+from app.services.calculator import calculate_bmi, calculate_bmr, calculate_tdee
+from app.services.recommender import recommend_menu
+from app.services.chatbot import extract_parameters, get_rule_response
 
 # Define test config
 class TestConfig:
@@ -124,6 +130,23 @@ def test_chatbot_rule_response(app):
         assert "Đã ghi nhận thông tin" in reply2
         assert updated_state2.get("height") == 170.0
         assert updated_state2.get("weight") == 60.0
+
+
+def test_chatbot_keeps_knowledge_questions_priority_over_profile_context(app):
+    with app.app_context():
+        state = {
+            "height": 170.0,
+            "weight": 60.0,
+            "age": 20,
+            "gender": "nam",
+            "budget": 60000.0,
+        }
+
+        protein_reply, _ = get_rule_response("protein là gì?", state)
+        assert "Chất đạm" in protein_reply
+
+        water_reply, _ = get_rule_response("uống bao nhiêu nước mỗi ngày?", state)
+        assert "nước" in water_reply.lower()
 
 # ================= 4. VIEW ROUTING TESTS =================
 

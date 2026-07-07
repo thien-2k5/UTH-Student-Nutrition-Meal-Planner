@@ -111,9 +111,22 @@ python3 database/seed.py
 ### Bước 5: Chạy ứng dụng web
 Khởi chạy Flask server cục bộ:
 ```bash
-python3 app.py
+FLASK_RUN_PORT=5001 python3 app.py
 ```
-Ứng dụng sẽ chạy tại địa chỉ: [http://localhost:5000](http://localhost:5000)
+Ứng dụng sẽ chạy tại địa chỉ: [http://localhost:5001](http://localhost:5001)
+
+Nếu bạn muốn chạy trên cổng khác, hãy thay đổi biến môi trường `FLASK_RUN_PORT`.
+
+### Chạy bằng Docker
+```bash
+docker compose up --build -d
+```
+Ứng dụng sẽ chạy tại [http://localhost:5001](http://localhost:5001)
+
+Dừng container:
+```bash
+docker compose down
+```
 
 ---
 

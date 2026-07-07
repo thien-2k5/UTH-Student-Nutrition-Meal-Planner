@@ -1,11 +1,31 @@
 import re
 import os
 import logging
+import unicodedata
 import requests
 from app.services.calculator import calculate_bmi, calculate_bmr, calculate_tdee
 from app.services.recommender import recommend_menu
 
 logger = logging.getLogger(__name__)
+
+
+def normalize_text(text: str) -> str:
+    """Normalize Vietnamese text so matching is robust to accents and punctuation."""
+    text = unicodedata.normalize("NFKD", text.lower())
+    text = "".join(ch for ch in text if not unicodedata.combining(ch))
+    text = re.sub(r"[^a-z0-9\s]", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+
+def contains_keyword(text: str, keyword: str) -> bool:
+    """Check whether a normalized keyword appears as a distinct word or phrase."""
+    normalized_text = normalize_text(text)
+    normalized_keyword = normalize_text(keyword)
+    if not normalized_keyword:
+        return False
+    return re.search(rf"(^|\s){re.escape(normalized_keyword)}($|\s)", normalized_text) is not None
+
 
 # Basic keywords for rule-based matching
 NUTRITION_ANSWERS = {
@@ -22,6 +42,8 @@ NUTRITION_ANSWERS = {
     "xo": "Chất xơ rất quan trọng cho tiêu hóa, giúp no lâu và ổn định đường huyết. Sinh viên nên bổ sung rau muống luộc, rau ngót, bí đỏ, cà chua hoặc bông cải xanh từ các bữa cơm tiệm (yêu cầu xin thêm rau), hoặc ăn chuối chín (3k/quả), trái cây tô (25k/phần).",
     "vitamin": "Vitamins và khoáng chất có trong rau củ, quả tươi giúp tăng sức đề kháng, tránh ốm vặt khi mùa thi đến. Hãy bổ sung nước cam vắt (15k), chanh dây (12k), sinh tố đu đủ (15k) hoặc đơn giản là ăn nhiều rau xanh trong bữa trưa/tối.",
     "nuoc": "Uống đủ nước giúp thanh lọc cơ thể, giảm mệt mỏi và tập trung học tập. Công thức: Cân nặng (kg) x 0.04 = Số lít nước cần uống mỗi ngày (ví dụ 50kg cần khoảng 2 lít nước). Hãy mang theo bình nước cá nhân khi lên giảng đường UTH nhé!",
+    "luong nuoc": "Uống đủ nước giúp thanh lọc cơ thể, giảm mệt mỏi và tập trung học tập. Công thức: Cân nặng (kg) x 0.04 = Số lít nước cần uống mỗi ngày (ví dụ 50kg cần khoảng 2 lít nước). Hãy mang theo bình nước cá nhân khi lên giảng đường UTH nhé!",
+    "uong bao nhieu nuoc": "Uống đủ nước giúp thanh lọc cơ thể, giảm mệt mỏi và tập trung học tập. Công thức: Cân nặng (kg) x 0.04 = Số lít nước cần uống mỗi ngày (ví dụ 50kg cần khoảng 2 lít nước). Hãy mang theo bình nước cá nhân khi lên giảng đường UTH nhé!",
     "bmi": "BMI (Body Mass Index) là Chỉ số khối cơ thể. Công thức = Cân nặng (kg) / [Chiều cao (m) * Chiều cao (m)]. Phân loại: Gầy (<18.5), Bình thường (18.5-24.9), Thừa cân (25-29.9), Béo phì (>=30). Bạn muốn mình tính BMI giúp không? Hãy nhắn chiều cao và cân nặng nhé!",
     "tdee": "TDEE (Total Daily Energy Expenditure) là tổng năng lượng cơ thể tiêu hao trong một ngày, bao gồm cả các hoạt động thể chất và tiêu hóa. TDEE quyết định việc bạn cần ăn bao nhiêu calo để tăng, giảm hoặc duy trì cân nặng.",
     "uth": "Chào người bạn UTH! Trường Đại học Giao thông vận tải TP.HCM nổi tiếng với tinh thần năng động. Học tập tại UTH đòi hỏi nhiều năng lượng, hãy để mình đồng hành giúp bạn ăn uống khoa học, tiết kiệm và khỏe mạnh nhé!",
@@ -32,7 +54,7 @@ NUTRITION_ANSWERS = {
 def extract_parameters(message: str, current_state: dict) -> dict:
     """Extract height, weight, age, gender, activity level, budget from text using regex."""
     state = current_state.copy()
-    message = message.lower()
+    message = normalize_text(message)
     
     # 1. Height (e.g. 170cm, cao 1.7m, cao 170, 170)
     height_match = re.search(r'(?:cao|chiều cao)?\s*(1[4-9]\d|20\d)\s*(?:cm|centimet)?', message)
@@ -90,8 +112,20 @@ def extract_parameters(message: str, current_state: dict) -> dict:
 
 def get_rule_response(message: str, state: dict) -> tuple[str, dict]:
     """Process message using rules and context state."""
+    normalized = normalize_text(message)
     updated_state = extract_parameters(message, state)
-    
+
+    # Handle knowledge questions before profile-based recommendation flow.
+    knowledge_keywords = [
+        "protein", "chat dam", "carb", "tinh bot", "fat", "chat beo", "fiber", "chat xo",
+        "vitamin", "vitamin va khoang chat", "nuoc", "uong bao nhieu nuoc", "bmi", "tdee",
+        "can uong", "uong du nuoc", "protein la gi", "cong thuc", "luong nuoc"
+    ]
+    if any(contains_keyword(normalized, keyword) for keyword in knowledge_keywords):
+        for kw, ans in NUTRITION_ANSWERS.items():
+            if contains_keyword(normalized, kw):
+                return ans, updated_state
+
     gained_new = False
     for k, v in updated_state.items():
         if state.get(k) != v:
@@ -175,7 +209,7 @@ def get_rule_response(message: str, state: dict) -> tuple[str, dict]:
         return nudge, updated_state
         
     for kw, ans in NUTRITION_ANSWERS.items():
-        if kw in message:
+        if contains_keyword(normalized, kw):
             return ans, updated_state
             
     fallback = (
