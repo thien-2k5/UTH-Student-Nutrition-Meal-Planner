@@ -3,6 +3,54 @@
 {% block title %}Giới thiệu dự án | UTH Nutrition{% endblock %}
 
 {% block content %}
+<style>
+    .contact-badge-custom {
+        background-color: #ffffff !important;
+        color: #0d7877 !important;
+        font-weight: 700 !important;
+        font-size: 0.95rem !important;
+        border: 2px solid #0d9488 !important;
+        padding: 0.75rem 1rem !important;
+        border-radius: 50px !important;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    .contact-badge-custom i {
+        color: #0d7877 !important;
+        font-size: 1.1rem;
+    }
+    
+    .contact-badge-custom:hover {
+        background-color: #f0fdfa !important;
+        border-color: #0d9488 !important;
+        box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3) !important;
+        color: #065f46 !important;
+    }
+    
+    .contact-badge-custom:hover i {
+        color: #065f46 !important;
+    }
+    
+    body.dark-mode .contact-badge-custom {
+        background-color: #f0fdfa !important;
+        color: #0d7877 !important;
+        border-color: #0d9488 !important;
+    }
+    
+    body.dark-mode .contact-badge-custom i {
+        color: #0d7877 !important;
+    }
+    
+    body.dark-mode .contact-badge-custom:hover {
+        background-color: #ccfbf1 !important;
+        border-color: #065f46 !important;
+        box-shadow: 0 4px 12px rgba(13, 152, 136, 0.4) !important;
+        color: #065f46 !important;
+    }
+</style>
 <div class="container py-4 fade-in">
     <div class="row justify-content-center">
         <div class="col-lg-9">
@@ -61,8 +109,8 @@
                     Nếu bạn có bất kỳ câu hỏi, phản hồi hoặc ý tưởng đóng góp cho dự án, xin vui lòng liên hệ ban phát triển qua email của tôi.
                 </p>
                 <div class="d-flex justify-content-center gap-3">
-                    <span class="badge bg-white text-success-custom px-3 py-2 rounded-pill"><i class="fa-solid fa-envelope me-1"></i> thientq2409@ut.edu.vn</span>
-                    <span class="badge bg-white text-success-custom px-3 py-2 rounded-pill"><i class="fa-solid fa-phone me-1"></i> (+84) 38 406 3341</span>
+                    <span class="contact-badge-custom"><i class="fa-solid fa-envelope"></i> thientq2409@ut.edu.vn</span>
+                    <span class="contact-badge-custom"><i class="fa-solid fa-phone"></i> (+84) 38 406 3341</span>
                 </div>
             </div>
         </div>
