@@ -1,0 +1,78 @@
+{% extends "components/base.html" %}
+
+{% block title %}Hỏi đáp AI Chatbot - Dinh dưỡng UTH | UTH Nutrition{% endblock %}
+
+{% block content %}
+<div class="container py-4 fade-in">
+    <div class="row justify-content-center">
+        <!-- Sidebar Instruction Guide -->
+        <div class="col-lg-3 d-none d-lg-block">
+            <div class="glass-card p-4 shadow border-light-custom position-sticky" style="top: 100px;">
+                <h5 class="fw-bold mb-3 text-body-custom"><i class="fa-solid fa-lightbulb text-accent me-2"></i>Hướng Dẫn Trò Chuyện</h5>
+                <p class="small text-muted">
+                    Trợ lý AI Dinh dưỡng có khả năng ghi nhớ các thông số của bạn để tư vấn thực đơn chi tiết.
+                </p>
+                <div class="tips-box">
+                    <div class="tip-item mb-3">
+                        <div class="fw-bold text-body-custom small"><i class="fa-solid fa-keyboard text-success-custom me-1"></i> Nhập thông số:</div>
+                        <div class="text-muted small italic">"Mình cao 170cm, nặng 60kg, 20 tuổi, giới tính nam, ngân sách 70k"</div>
+                    </div>
+                    <div class="tip-item mb-3">
+                        <div class="fw-bold text-body-custom small"><i class="fa-solid fa-question text-success-custom me-1"></i> Hỏi kiến thức:</div>
+                        <div class="text-muted small italic">"Protein là gì?", "Cần uống bao nhiêu nước?"</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Chat Box -->
+        <div class="col-lg-8">
+            <div class="card border-0 glass-card shadow-lg chat-page-card">
+                <!-- Chat Header -->
+                <div class="card-header bg-gradient-custom text-white p-3 d-flex align-items-center">
+                    <div class="bot-avatar-large me-3">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                        <h5 class="mb-0 fw-bold">Trợ Lý Dinh Dưỡng Học Đường</h5>
+                        <small class="text-white-50"><span class="status-indicator"></span> Trực tuyến 24/7</small>
+                    </div>
+                </div>
+                
+                <!-- Chat Messages Body -->
+                <div class="card-body chat-page-messages p-4" id="chat-page-messages-box">
+                    <div class="message bot-message fade-in">
+                        Chào bạn! Mình là Trợ lý Dinh dưỡng UTH. Rất vui được hỗ trợ bạn xây dựng thực đơn ăn uống khoa học và tiết kiệm.
+                    </div>
+                    <div class="message bot-message fade-in">
+                        Bạn có thể nhập thông tin của mình (ví dụ: *cao 170cm, nặng 60kg, 19 tuổi, nam, ngân sách 60k*) để mình gợi ý bữa ăn chính xác nhất nhé!
+                    </div>
+                </div>
+                
+                <!-- Quick Suggestion Chips -->
+                <div class="p-3 border-top bg-light-custom d-flex flex-wrap gap-2" id="chat-quick-suggestions">
+                    <button class="btn btn-sm btn-outline-success-custom rounded-pill chat-chip-btn" data-msg="Cao 168cm, nặng 55kg, 20 tuổi, nữ, ngân sách 60k">
+                        <i class="fa-solid fa-calculator me-1"></i> Nhập thử thông số mẫu
+                    </button>
+                    <button class="btn btn-sm btn-outline-success-custom rounded-pill chat-chip-btn" data-msg="Protein là gì?">
+                        <i class="fa-solid fa-circle-question me-1"></i> Protein là gì?
+                    </button>
+                    <button class="btn btn-sm btn-outline-success-custom rounded-pill chat-chip-btn" data-msg="Sinh viên UTH uống bao nhiêu nước mỗi ngày?">
+                        <i class="fa-solid fa-droplet me-1"></i> Lượng nước uống?
+                    </button>
+                </div>
+                
+                <!-- Chat Input Footer -->
+                <div class="card-footer p-3 bg-transparent border-top">
+                    <div class="input-group">
+                        <input type="text" class="form-control glass-input" id="chat-page-input-text" placeholder="Nhập tin nhắn của bạn...">
+                        <button class="btn btn-gradient px-4" id="chat-page-btn-send" aria-label="Send">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

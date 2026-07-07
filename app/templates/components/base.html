@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Gợi ý thực đơn UTH{% endblock %}</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Hệ thống xây dựng thực đơn dinh dưỡng khoa học, tiết kiệm dành riêng cho sinh viên UTH. Tính toán BMI, TDEE và gợi ý bữa ăn chuẩn xác.">
+    <meta name="author" content="UTH Nutrition Planner Team">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Chart.js (Required for dashboard charts) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body class="light-mode">
+    <!-- Background overlay elements for visual aesthetics -->
+    <div class="blob-bgblob blob-1"></div>
+    <div class="blob-bgblob blob-2"></div>
+    
+    <!-- Header/Navigation Bar -->
+    <nav class="navbar navbar-expand-lg sticky-top glass-nav">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.index') }}" id="nav-brand">
+                <div class="brand-logo me-2">
+                    <i class="fa-solid fa-leaf text-success-custom fs-3"></i>
+                </div>
+                <span class="brand-text">UTH <span class="text-accent">Nutrition</span></span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{{ url_for('main.index') }}" id="nav-home">
+                            <i class="fa-solid fa-house me-1"></i> Trang chủ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/bmi' %}active{% endif %}" href="{{ url_for('main.bmi_page') }}" id="nav-bmi">
+                            <i class="fa-solid fa-calculator me-1"></i> Tính BMI
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/recommend' %}active{% endif %}" href="{{ url_for('main.recommend_page') }}" id="nav-recommend">
+                            <i class="fa-solid fa-utensils me-1"></i> Gợi ý thực đơn
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/chat' %}active{% endif %}" href="{{ url_for('main.chat_page') }}" id="nav-chat">
+                            <i class="fa-solid fa-comments me-1"></i> Chat AI
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/knowledge' %}active{% endif %}" href="{{ url_for('main.knowledge_page') }}" id="nav-knowledge">
+                            <i class="fa-solid fa-book-open me-1"></i> Kiến thức
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/about' %}active{% endif %}" href="{{ url_for('main.about_page') }}" id="nav-about">
+                            <i class="fa-solid fa-circle-info me-1"></i> Giới thiệu
+                        </a>
+                    </li>
+                    <!-- Dark Mode Toggle Button -->
+                    <li class="nav-item ms-lg-3">
+                        <button class="btn btn-theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
+                            <i class="fa-solid fa-moon text-accent"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container Content -->
+    <main class="page-content py-4">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto py-4 glass-footer">
+        <div class="container text-center">
+            <div class="row align-items-center">
+                <div class="col-md-4 text-md-start mb-3 mb-md-0">
+                    <p class="mb-0 text-muted">&copy; 2026 UTH Student Nutrition Planner. Phát triển dành riêng cho sinh viên UTH.</p>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="https://ut.edu.vn/" target="_blank" class="text-decoration-none text-muted-hover"><i class="fa-solid fa-graduation-cap"></i> UTH Website</a>
+                        <a href="{{ url_for('main.about_page') }}" class="text-decoration-none text-muted-hover"><i class="fa-solid fa-shield-halved"></i> Về dự án</a>
+                    </div>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <span class="badge bg-success-light text-success-custom px-3 py-2 rounded-pill"><i class="fa-solid fa-heart-pulse animate-pulse"></i> Ăn sạch - Học tốt</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Chatbot Widget (Bonus & Requirement) -->
+    <div class="chatbot-widget-container" id="chatbot-widget">
+        <button class="chatbot-trigger-btn shadow-lg" id="chat-trigger" aria-label="Open Chatbot">
+            <i class="fa-solid fa-message chat-icon-open"></i>
+            <i class="fa-solid fa-xmark chat-icon-close d-none"></i>
+            <span class="pulse-ring"></span>
+        </button>
+        
+        <div class="chatbot-window glass-card shadow-lg d-none" id="chat-window">
+            <div class="chatbot-header">
+                <div class="d-flex align-items-center">
+                    <div class="bot-avatar me-2">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                        <h6 class="mb-0 bot-title">Trợ Lý Dinh Dưỡng UTH</h6>
+                        <small class="text-white-50"><span class="status-indicator"></span> Online</small>
+                    </div>
+                </div>
+                <button class="btn-close btn-close-white" id="chat-close" aria-label="Close Chat"></button>
+            </div>
+            
+            <div class="chatbot-messages" id="chatbot-messages-box">
+                <div class="message bot-message">
+                    Xin chào! Mình là Trợ lý Dinh dưỡng UTH. Hãy nhập thông tin thể trạng (ví dụ: `cao 170cm, nặng 60kg, 20 tuổi, nam, ngân sách 70k`) hoặc hỏi mình bất cứ điều gì về dinh dưỡng nhé!
+                </div>
+            </div>
+            
+            <div class="chatbot-input-container">
+                <input type="text" placeholder="Nhập tin nhắn..." class="form-control" id="chat-input-text">
+                <button class="btn btn-send-message" id="chat-btn-send">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification structure (Bonus) -->
+    <div class="toast-container position-fixed bottom-0 start-0 p-3" style="z-index: 1100;">
+        <div id="app-toast" class="toast glass-toast border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body d-flex align-items-center">
+                    <i class="fa-solid fa-info-circle me-2 text-success-custom" id="toast-icon"></i>
+                    <span id="toast-message" class="text-body-custom">Notification message</span>
+                </div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay (Bonus) -->
+    <div id="loading-overlay" class="loading-overlay d-none">
+        <div class="spinner-container">
+            <div class="spinner-grow text-success-custom" role="status"></div>
+            <div class="spinner-grow text-accent mx-2" role="status"></div>
+            <div class="spinner-grow text-success-custom" role="status"></div>
+            <h6 class="mt-3 text-white">Đang xử lý dữ liệu...</h6>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom scripts -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>

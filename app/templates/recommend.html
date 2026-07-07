@@ -1,0 +1,194 @@
+{% extends "components/base.html" %}
+
+{% block title %}Gợi ý thực đơn dinh dưỡng sinh viên | UTH Nutrition{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-md-5 py-4 fade-in">
+    <div class="row g-4">
+        <!-- Sidebar Inputs -->
+        <div class="col-xl-3 col-lg-4">
+            <div class="glass-card p-4 shadow border-light-custom position-sticky" style="top: 100px; z-index: 10;">
+                <h4 class="fw-bold mb-4 text-body-custom"><i class="fa-solid fa-sliders text-success-custom me-2"></i>Thiết Lập Thực Đơn</h4>
+                
+                <form id="recommend-form" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold text-body-custom">Giới tính & Tuổi</label>
+                        <div class="row g-2">
+                            <div class="col-7">
+                                <select class="form-select glass-input" id="gender" name="gender" required>
+                                    <option value="nam" selected>Nam</option>
+                                    <option value="nữ">Nữ</option>
+                                </select>
+                            </div>
+                            <div class="col-5">
+                                <input type="number" class="form-control glass-input" id="age" name="age" min="15" max="80" placeholder="Tuổi" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold text-body-custom">Chiều cao & Cân nặng</label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <input type="number" class="form-control glass-input" id="height" name="height" min="100" max="250" placeholder="Cao (cm)" required>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <input type="number" class="form-control glass-input" id="weight" name="weight" min="30" max="200" placeholder="Nặng (kg)" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="activity" class="form-label fw-semibold text-body-custom">Vận động</label>
+                        <select class="form-select glass-input" id="activity" name="activity" required>
+                            <option value="sedentary" selected>Ít vận động</option>
+                            <option value="lightly_active">Vận động nhẹ</option>
+                            <option value="moderately_active">Vận động vừa</option>
+                            <option value="very_active">Vận động nhiều</option>
+                            <option value="extra_active">Vận động cực nhiều</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="budget" class="form-label fw-semibold text-body-custom">Ngân sách ăn uống / ngày</label>
+                        <div class="input-group">
+                            <span class="input-group-text glass-input-addon"><i class="fa-solid fa-wallet text-muted"></i></span>
+                            <select class="form-select glass-input" id="budget" name="budget" required>
+                                <option value="40000">40.000đ (Tiết kiệm nhất)</option>
+                                <option value="50000" selected>50.000đ (Bình dân)</option>
+                                <option value="70000">70.000đ (Trung cấp)</option>
+                                <option value="100000">100.000đ (Đầy đủ)</option>
+                                <option value="150000">150.000đ (Chất lượng cao)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="goal" class="form-label fw-semibold text-body-custom">Mục tiêu dinh dưỡng</label>
+                        <select class="form-select glass-input" id="goal" name="goal" required>
+                            <option value="maintain" selected>Giữ cân (Duy trì thể trạng)</option>
+                            <option value="lose">Giảm cân (Thâm hụt calo)</option>
+                            <option value="gain">Tăng cân (Thặng dư calo)</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-gradient w-100 py-3 rounded-pill shadow btn-generate">
+                        <i class="fa-solid fa-wand-magic-sparkles me-2 animate-pulse"></i> Tạo Thực Đơn
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Main Panel Content -->
+        <div class="col-xl-9 col-lg-8">
+            <!-- Initial state placeholder -->
+            <div class="glass-card p-5 text-center shadow border-light-custom my-auto fade-in" id="recommend-placeholder">
+                <i class="fa-solid fa-utensils display-3 text-success-custom mb-4 animate-bounce"></i>
+                <h3 class="fw-bold text-body-custom">Nhận Gợi Ý Thực Đơn Của Bạn</h3>
+                <p class="text-muted max-width-600 mx-auto">
+                    Điền thông số thể chất và ngân sách ở bảng bên cạnh, sau đó ấn **Tạo Thực Đơn** để nhận kế hoạch bữa ăn và biểu đồ phân tích tỷ lệ dinh dưỡng.
+                </p>
+            </div>
+            
+            <!-- Output Results (Hidden by default, shown via JS) -->
+            <div class="d-none" id="recommend-result-container">
+                <!-- Summary bar -->
+                <div class="glass-card p-4 shadow border-light-custom mb-4 fade-in">
+                    <div class="row align-items-center justify-content-between g-3">
+                        <div class="col-md-7 text-center text-md-start">
+                            <h4 class="fw-bold mb-1 text-body-custom">Thực Đơn Dinh Dưỡng Dành Cho Bạn</h4>
+                            <p class="text-muted mb-0">
+                                Thể trạng: <strong class="text-success-custom" id="metric-bmi-class">Bình thường</strong> | TDEE: <strong id="metric-tdee">2000</strong> kcal | Mục tiêu Calo: <strong class="text-accent" id="metric-target-calories">2000</strong> kcal
+                            </p>
+                        </div>
+                        <div class="col-md-5 text-center text-md-end d-flex flex-wrap justify-content-center justify-content-md-end gap-2">
+                            <button class="btn btn-outline-success-custom rounded-pill btn-sm px-3" id="btn-regenerate">
+                                <i class="fa-solid fa-rotate me-1"></i> Đổi thực đơn khác
+                            </button>
+                            <button class="btn btn-gradient rounded-pill btn-sm px-3" id="btn-print-menu">
+                                <i class="fa-solid fa-print me-1"></i> In / Xuất PDF
+                            </button>
+                            <button class="btn btn-dark-custom rounded-pill btn-sm px-3" id="btn-download-csv">
+                                <i class="fa-solid fa-download me-1"></i> Tải CSV
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Food Grid -->
+                <div class="row g-3 mb-4 print-area" id="menu-cards-grid">
+                    <!-- Dynamic food cards (Breakfast, Lunch, Dinner, Snack) will be appended here -->
+                </div>
+                
+                <!-- Dashboard Analysis (Charts) -->
+                <div class="row g-4 mb-5">
+                    <div class="col-md-6">
+                        <div class="glass-card p-4 shadow border-light-custom h-100 text-center">
+                            <h5 class="fw-bold text-body-custom mb-3"><i class="fa-solid fa-chart-pie text-success-custom me-2"></i>Tỷ Lệ Chất Dinh Dưỡng</h5>
+                            <div class="chart-container" style="position: relative; height:280px; width:100%">
+                                <canvas id="macroPieChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="glass-card p-4 shadow border-light-custom h-100 text-center">
+                            <h5 class="fw-bold text-body-custom mb-3"><i class="fa-solid fa-chart-bar text-accent me-2"></i>So Sánh Năng Lượng & Chi Phí</h5>
+                            <div class="chart-container" style="position: relative; height:280px; width:100%">
+                                <canvas id="calorieBarChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Food Database Search Directory (Bonus) -->
+            <div class="glass-card p-4 p-md-5 shadow border-light-custom fade-in">
+                <div class="text-center text-md-start mb-4">
+                    <h4 class="fw-bold text-body-custom"><i class="fa-solid fa-magnifying-glass-chart text-success-custom me-2"></i>Tra Cứu Dữ Liệu Món Ăn</h4>
+                    <p class="text-muted mb-0">Tìm kiếm và lọc các món ăn Việt Nam giàu dinh dưỡng có trong hệ thống.</p>
+                </div>
+                
+                <!-- Filters UI -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="input-group">
+                            <span class="input-group-text glass-input-addon"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                            <input type="text" class="form-control glass-input" id="search-food-name" placeholder="Tên món ăn (Ví dụ: phở, trứng...)">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3 col-sm-6">
+                        <select class="form-select glass-input" id="search-food-category">
+                            <option value="">Tất cả danh mục</option>
+                            <option value="Sáng">Bữa sáng</option>
+                            <option value="Trưa/Tối">Bữa trưa / tối</option>
+                            <option value="Ăn vặt">Món ăn vặt</option>
+                            <option value="Nước uống">Nước uống</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-2 col-sm-6">
+                        <input type="number" class="form-control glass-input" id="search-food-max-price" placeholder="Giá tối đa (đ)">
+                    </div>
+                    
+                    <div class="col-md-3 col-sm-6 d-flex gap-2">
+                        <input type="number" class="form-control glass-input" id="search-food-max-cal" placeholder="Calo tối đa">
+                        <button class="btn btn-gradient px-3 rounded-3" id="btn-search-foods" aria-label="Search">
+                            <i class="fa-solid fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Search Result Grid -->
+                <div class="row g-3" id="search-results-grid" style="max-height: 500px; overflow-y: auto;">
+                    <!-- Seeded foods will populate here dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,241 @@
+{% extends "components/base.html" %}
+
+{% block title %}Kiến thức dinh dưỡng học đường | UTH Nutrition{% endblock %}
+
+{% block content %}
+<div class="container py-4 fade-in">
+    <div class="text-center mb-5">
+        <span class="badge bg-success-light text-success-custom mb-2 px-3 py-2 rounded-pill fw-bold">
+            <i class="fa-solid fa-graduation-cap me-1"></i> Cẩm nang sức khỏe
+        </span>
+        <h2 class="fw-bold text-body-custom">Kiến Thức Dinh Dưỡng Học Đường</h2>
+        <p class="text-muted">Các khái niệm cốt lõi giúp sinh viên UTH ăn khỏe, học tốt, vượt qua mọi kỳ thi nhẹ nhàng.</p>
+    </div>
+    
+    <div class="row g-4">
+        <!-- Sidebar Navigation (Tabs list) -->
+        <div class="col-lg-3 col-md-4">
+            <div class="glass-card p-3 shadow border-light-custom position-sticky" style="top: 100px; z-index: 5;">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <button class="nav-link active text-start py-3 mb-2" id="v-pills-protein-tab" data-bs-toggle="pill" data-bs-target="#v-pills-protein" type="button" role="tab" aria-controls="v-pills-protein" aria-selected="true">
+                        <i class="fa-solid fa-dna me-2 text-success-custom"></i> Protein (Chất đạm)
+                    </button>
+                    <button class="nav-link text-start py-3 mb-2" id="v-pills-carb-tab" data-bs-toggle="pill" data-bs-target="#v-pills-carb" type="button" role="tab" aria-controls="v-pills-carb" aria-selected="false">
+                        <i class="fa-solid fa-wheat-awn me-2 text-accent"></i> Carb (Tinh bột)
+                    </button>
+                    <button class="nav-link text-start py-3 mb-2" id="v-pills-fat-tab" data-bs-toggle="pill" data-bs-target="#v-pills-fat" type="button" role="tab" aria-controls="v-pills-fat" aria-selected="false">
+                        <i class="fa-solid fa-droplet me-2 text-warning"></i> Fat (Chất béo)
+                    </button>
+                    <button class="nav-link text-start py-3 mb-2" id="v-pills-vitamins-tab" data-bs-toggle="pill" data-bs-target="#v-pills-vitamins" type="button" role="tab" aria-controls="v-pills-vitamins" aria-selected="false">
+                        <i class="fa-solid fa-pepper-hot me-2 text-danger"></i> Vitamin & Khoáng chất
+                    </button>
+                    <button class="nav-link text-start py-3 mb-2" id="v-pills-fiber-tab" data-bs-toggle="pill" data-bs-target="#v-pills-fiber" type="button" role="tab" aria-controls="v-pills-fiber" aria-selected="false">
+                        <i class="fa-solid fa-seedling me-2 text-success-custom"></i> Chất xơ (Fiber)
+                    </button>
+                    <button class="nav-link text-start py-3 mb-2" id="v-pills-water-tab" data-bs-toggle="pill" data-bs-target="#v-pills-water" type="button" role="tab" aria-controls="v-pills-water" aria-selected="false">
+                        <i class="fa-solid fa-glass-water me-2 text-info"></i> Nước uống (Hydration)
+                    </button>
+                    <button class="nav-link text-start py-3" id="v-pills-tips-tab" data-bs-toggle="pill" data-bs-target="#v-pills-tips" type="button" role="tab" aria-controls="v-pills-tips" aria-selected="false">
+                        <i class="fa-solid fa-star me-2 text-warning"></i> Lời khuyên cho sinh viên
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tabs content -->
+        <div class="col-lg-9 col-md-8">
+            <div class="tab-content" id="v-pills-tabContent">
+                <!-- Protein Tab -->
+                <div class="tab-pane fade show active" id="v-pills-protein" role="tabpanel" aria-labelledby="v-pills-protein-tab">
+                    <div class="glass-card p-4 p-md-5 shadow border-light-custom">
+                        <h3 class="fw-bold mb-3 text-body-custom"><i class="fa-solid fa-dna text-success-custom me-2"></i>Protein (Chất Đạm) Là Gì?</h3>
+                        <p class="text-muted">
+                            Protein là khối xây dựng cơ bản của cơ bắp, cơ quan và các hormone trong cơ thể. Đối với sinh viên, protein giúp duy trì sự tỉnh táo, phát triển tầm vóc và tăng sức đề kháng.
+                        </p>
+                        <h5 class="fw-bold text-body-custom mt-4 mb-3">Nguồn Protein Bình Dân Cho Sinh Viên UTH:</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="bg-light-custom p-3 rounded-3">
+                                    <div class="fw-bold text-success-custom"><i class="fa-solid fa-egg me-1"></i> Trứng gà / vịt:</div>
+                                    <p class="small text-muted mb-0">Chỉ từ 4k-5k/quả, cung cấp khoảng 6g protein sinh học cao cùng nhiều vitamin quý.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="bg-light-custom p-3 rounded-3">
+                                    <div class="fw-bold text-success-custom"><i class="fa-solid fa-drumstick-bite me-1"></i> Ức gà áp chảo:</div>
+                                    <p class="small text-muted mb-0">Ức gà chợ lẻ chỉ tầm 60k-70k/kg, chứa lượng đạm cao và ít béo xấu.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="bg-light-custom p-3 rounded-3">
+                                    <div class="fw-bold text-success-custom"><i class="fa-solid fa-cheese me-1"></i> Đậu hũ (Đậu phụ):</div>
+                                    <p class="small text-muted mb-0">Chỉ 3k-5k/miếng, nguồn protein thực vật cực lành mạnh và giàu canxi.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="bg-light-custom p-3 rounded-3">
+                                    <div class="fw-bold text-success-custom"><i class="fa-solid fa-cow me-1"></i> Sữa tươi & Sữa đậu nành:</div>
+                                    <p class="small text-muted mb-0">Ly sữa đậu nành nóng giá 6k cổng trường UTH cung cấp nguồn đạm thực vật dồi dào.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Carb Tab -->
+                <div class="tab-pane fade" id="v-pills-carb" role="tabpanel" aria-labelledby="v-pills-carb-tab">
+                    <div class="glass-card p-4 p-md-5 shadow border-light-custom">
+                        <h3 class="fw-bold mb-3 text-body-custom"><i class="fa-solid fa-wheat-awn text-accent me-2"></i>Carb (Tinh Bột) & Năng Lượng Não Bộ</h3>
+                        <p class="text-muted">
+                            Carbohydrates là nguồn năng lượng chính cho cơ thể và là nhiên liệu duy nhất cho hoạt động của não bộ. Việc chọn đúng loại carb giúp bạn học tập tập trung hơn, không bị mệt mỏi trong giờ học.
+                        </p>
+                        
+                        <div class="row g-4 mt-2">
+                            <div class="col-md-6">
+                                <div class="border rounded-3 p-3 h-100">
+                                    <h6 class="fw-bold text-success-custom"><i class="fa-solid fa-circle-check me-1"></i> Carb phức (Hấp thu chậm - Nên dùng)</h6>
+                                    <p class="small text-muted mb-0">Khoai lang luộc, ngô luộc, yến mạch, cơm gạo lứt. Giúp giải phóng năng lượng từ từ, ổn định đường huyết, giúp no lâu và tập trung học tốt.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="border rounded-3 p-3 h-100">
+                                    <h6 class="fw-bold text-danger"><i class="fa-solid fa-circle-xmark me-1"></i> Carb nhanh (Hấp thu nhanh - Hạn chế)</h6>
+                                    <p class="small text-muted mb-0">Trà sữa, nước ngọt, kẹo, bánh ngọt, bánh mì trắng. Làm tăng vọt lượng đường trong máu rồi giảm nhanh chóng, khiến bạn buồn ngủ, uể oải trong lớp học.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Fat Tab -->
+                <div class="tab-pane fade" id="v-pills-fat" role="tabpanel" aria-labelledby="v-pills-fat-tab">
+                    <div class="glass-card p-4 p-md-5 shadow border-light-custom">
+                        <h3 class="fw-bold mb-3 text-body-custom"><i class="fa-solid fa-droplet text-warning me-2"></i>Fat (Chất Béo Tốt) & Hormone</h3>
+                        <p class="text-muted">
+                            Chất béo đóng vai trò cốt lõi trong việc bảo vệ màng tế bào, tổng hợp hormone và hấp thụ các vitamin tan trong dầu (A, D, E, K).
+                        </p>
+                        <div class="bg-light-custom p-4 rounded-4 mt-3">
+                            <h5 class="fw-bold text-body-custom mb-2">Chọn chất béo thông minh:</h5>
+                            <ul class="text-muted small">
+                                <li class="mb-2"><strong>Chất béo không bão hòa (Tốt)</strong>: Omega-3 trong cá hồi, cá hú, cá nục, chất béo tự nhiên trong đậu phộng rang, hạt điều giúp tăng trí nhớ, giảm cholesterol có hại.</li>
+                                <li><strong>Chất béo bão hòa và trans fat (Xấu)</strong>: Dầu chiên đi chiên lại nhiều lần ở các hàng quán cơm bụi, đồ ăn nhanh. Gây mụn, béo phì và tăng nguy cơ tim mạch.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vitamins Tab -->
+                <div class="tab-pane fade" id="v-pills-vitamins" role="tabpanel" aria-labelledby="v-pills-vitamins-tab">
+                    <div class="glass-card p-4 p-md-5 shadow border-light-custom">
+                        <h3 class="fw-bold mb-3 text-body-custom"><i class="fa-solid fa-pepper-hot text-danger me-2"></i>Vitamins & Khoáng Chất</h3>
+                        <p class="text-muted">
+                            Vi chất dinh dưỡng tuy chỉ cần lượng nhỏ nhưng lại quyết định khả năng đề kháng, trao đổi chất và độ linh hoạt của mắt trong những buổi ôn thi khuya.
+                        </p>
+                        
+                        <div class="table-responsive mt-3">
+                            <table class="table table-bordered small">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Vitamin / Khoáng chất</th>
+                                        <th>Vai trò</th>
+                                        <th>Thực phẩm bình dân gợi ý</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Vitamin A</strong></td>
+                                        <td>Sáng mắt, đẹp da, tăng đề kháng</td>
+                                        <td>Bí đỏ, xôi gấc, cà rốt, trứng gà</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Vitamin C</strong></td>
+                                        <td>Tăng đề kháng, giảm căng thẳng học tập</td>
+                                        <td>Cam vắt, chanh dây, dưa leo, rau muống</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Canxi</strong></td>
+                                        <td>Chắc xương, dẫn truyền thần kinh</td>
+                                        <td>Sữa tươi, đậu hũ non, tép rang cả vỏ</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Sắt</strong></td>
+                                        <td>Tạo máu, tránh hoa mắt khi đứng dậy</td>
+                                        <td>Gan lợn (tiệm cơm), thịt bò viên, trứng</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Fiber Tab -->
+                <div class="tab-pane fade" id="v-pills-fiber" role="tabpanel" aria-labelledby="v-pills-fiber-tab">
+                    <div class="glass-card p-4 p-md-5 shadow border-light-custom">
+                        <h3 class="fw-bold mb-3 text-body-custom"><i class="fa-solid fa-seedling text-success-custom me-2"></i>Chất Xơ (Fiber)</h3>
+                        <p class="text-muted">
+                            Chất xơ giống như chổi làm sạch hệ tiêu hóa, giúp ngăn ngừa táo bón, tăng sức khỏe vi khuẩn đường ruột (vi sinh vật có lợi), giúp ổn định cân nặng hiệu quả.
+                        </p>
+                        <div class="bg-light-custom p-4 rounded-4">
+                            <h6 class="fw-bold text-body-custom"><i class="fa-solid fa-info-circle me-1 text-success-custom"></i> Mẹo bổ sung xơ cực rẻ cho sinh viên:</h6>
+                            <p class="small text-muted mb-0">
+                                - Khi đi ăn cơm đĩa, hãy luôn chủ động xin thêm rau luộc, dưa leo hoặc canh rau (thường miễn phí hoặc chỉ 2k-3k).<br>
+                                - Mua chuối chín (khoảng 15k/nải lớn) để ăn bữa phụ.<br>
+                                - Tự luộc khoai lang ăn sáng để bổ sung tinh bột xơ chất lượng cao.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Water Tab -->
+                <div class="tab-pane fade" id="v-pills-water" role="tabpanel" aria-labelledby="v-pills-water-tab">
+                    <div class="glass-card p-4 p-md-5 shadow border-light-custom">
+                        <h3 class="fw-bold mb-3 text-body-custom"><i class="fa-solid fa-glass-water text-info me-2"></i>Nước Uống & Hydration</h3>
+                        <p class="text-muted">
+                            Nước chiếm hơn 70% cơ thể và 80% não bộ. Thiếu nước chỉ 2% đã khiến cơ thể suy giảm khả năng tập trung, gây đau đầu, buồn ngủ khi nghe giảng.
+                        </p>
+                        <div class="row align-items-center g-3 mt-2">
+                            <div class="col-md-8">
+                                <h6 class="fw-bold text-body-custom">Công thức tính lượng nước uống chuẩn:</h6>
+                                <div class="fs-4 text-gradient fw-bold mb-2">Cân nặng (kg) x 0.04 = Lượng nước cần uống (lít/ngày)</div>
+                                <p class="small text-muted">Ví dụ: Sinh viên nặng 55kg cần uống: 55 x 0.04 = 2.2 lít nước lọc mỗi ngày.</p>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <i class="fa-solid fa-droplet text-info display-2 animate-bounce"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tips Tab -->
+                <div class="tab-pane fade" id="v-pills-tips" role="tabpanel" aria-labelledby="v-pills-tips-tab">
+                    <div class="glass-card p-4 p-md-5 shadow border-light-custom">
+                        <h3 class="fw-bold mb-4 text-body-custom"><i class="fa-solid fa-star text-warning me-2"></i>Lời Khuyên Vàng Dinh Dưỡng Cho Sinh Viên UTH</h3>
+                        
+                        <div class="timeline-tips">
+                            <div class="tip-card mb-4 border-start border-success-custom border-3 ps-3">
+                                <h6 class="fw-bold text-body-custom">1. Không bao giờ bỏ bữa sáng</h6>
+                                <p class="small text-muted">Bữa sáng đánh thức quá trình trao đổi chất của cơ thể sau giấc ngủ dài. Chỉ cần một chiếc bánh mì ốp la (15k) hoặc đĩa xôi mặn (15k) cũng đủ giúp bạn tràn đầy năng lượng học tập.</p>
+                            </div>
+                            
+                            <div class="tip-card mb-4 border-start border-success-custom border-3 ps-3">
+                                <h6 class="fw-bold text-body-custom">2. Mang theo bình nước cá nhân</h6>
+                                <p class="small text-muted">Thay vì tốn 10k-15k mua nước chai đóng sẵn, hãy tự chuẩn bị bình nước cá nhân lấy nước sạch miễn phí tại các bình nước nóng lạnh ở giảng đường UTH. Tiết kiệm và an toàn vệ sinh.</p>
+                            </div>
+                            
+                            <div class="tip-card mb-4 border-start border-success-custom border-3 ps-3">
+                                <h6 class="fw-bold text-body-custom">3. Ưu tiên tự chuẩn bị bữa phụ nhẹ</h6>
+                                <p class="small text-muted">Sữa chua nếp cẩm, chuối chín, bắp ngô luộc là những món ăn phụ giá siêu hạt dẻ chỉ 5k-10k nhưng bổ sung năng lượng cực tốt cho giờ giải lao.</p>
+                            </div>
+                            
+                            <div class="tip-card border-start border-success-custom border-3 ps-3">
+                                <h6 class="fw-bold text-body-custom">4. Cân nhắc tự nấu ăn chung nhóm</h6>
+                                <p class="small text-muted">Nếu ở trọ cùng bạn học UTH, hãy chung tiền đi chợ nấu ăn. Nấu ăn nhóm 3-4 người sẽ giúp bữa cơm đa dạng món, đủ chất và chi phí chỉ bằng 2/3 so với ăn ngoài tiệm bụi!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

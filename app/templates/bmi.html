@@ -1,0 +1,148 @@
+{% extends "components/base.html" %}
+
+{% block title %}Tính chỉ số BMI & TDEE | UTH Nutrition{% endblock %}
+
+{% block content %}
+<div class="container py-4 fade-in">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Header card -->
+            <div class="text-center mb-5">
+                <h2 class="fw-bold text-body-custom"><i class="fa-solid fa-calculator text-success-custom me-2"></i>Tính Toán Thể Trạng BMI & TDEE</h2>
+                <p class="text-muted">Nhập chính xác các chỉ số cơ thể của bạn để nhận phân tích dinh dưỡng chuẩn xác.</p>
+            </div>
+            
+            <!-- Form Card -->
+            <div class="glass-card p-4 p-md-5 shadow-lg mb-5 border-light-custom">
+                <form id="bmi-form" class="needs-validation" novalidate>
+                    <div class="row g-4">
+                        <!-- Gender Selection -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-body-custom">Giới tính</label>
+                            <div class="d-flex gap-3">
+                                <div class="flex-fill">
+                                    <input type="radio" class="btn-check" name="gender" id="gender-male" value="nam" checked required>
+                                    <label class="btn btn-outline-success-custom w-100 py-3 rounded-3" for="gender-male">
+                                        <i class="fa-solid fa-mars fs-5 me-2"></i> Nam
+                                    </label>
+                                </div>
+                                <div class="flex-fill">
+                                    <input type="radio" class="btn-check" name="gender" id="gender-female" value="nữ" required>
+                                    <label class="btn btn-outline-success-custom w-100 py-3 rounded-3" for="gender-female">
+                                        <i class="fa-solid fa-venus fs-5 me-2"></i> Nữ
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Age Input -->
+                        <div class="col-md-6">
+                            <label for="age" class="form-label fw-bold text-body-custom">Tuổi của bạn (năm)</label>
+                            <div class="input-group">
+                                <span class="input-group-text glass-input-addon"><i class="fa-solid fa-calendar-days text-muted"></i></span>
+                                <input type="number" class="form-control glass-input" id="age" name="age" min="15" max="80" placeholder="Ví dụ: 20" required>
+                                <div class="invalid-feedback">Vui lòng nhập tuổi hợp lệ (15 - 80).</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Height Input -->
+                        <div class="col-md-6">
+                            <label for="height" class="form-label fw-bold text-body-custom">Chiều cao (cm)</label>
+                            <div class="input-group">
+                                <span class="input-group-text glass-input-addon"><i class="fa-solid fa-ruler-vertical text-muted"></i></span>
+                                <input type="number" class="form-control glass-input" id="height" name="height" min="100" max="250" placeholder="Ví dụ: 170" required>
+                                <span class="input-group-text glass-input-addon">cm</span>
+                                <div class="invalid-feedback">Chiều cao từ 100cm đến 250cm.</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Weight Input -->
+                        <div class="col-md-6">
+                            <label for="weight" class="form-label fw-bold text-body-custom">Cân nặng (kg)</label>
+                            <div class="input-group">
+                                <span class="input-group-text glass-input-addon"><i class="fa-solid fa-weight-scale text-muted"></i></span>
+                                <input type="number" class="form-control glass-input" id="weight" name="weight" min="30" max="200" placeholder="Ví dụ: 60" required>
+                                <span class="input-group-text glass-input-addon">kg</span>
+                                <div class="invalid-feedback">Cân nặng từ 30kg đến 200kg.</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Activity Level -->
+                        <div class="col-12">
+                            <label for="activity" class="form-label fw-bold text-body-custom">Mức độ vận động hàng tuần</label>
+                            <div class="input-group">
+                                <span class="input-group-text glass-input-addon"><i class="fa-solid fa-person-running text-muted"></i></span>
+                                <select class="form-select glass-input" id="activity" name="activity" required>
+                                    <option value="sedentary" selected>Ít vận động (Chỉ đi học, ngồi nhiều, không tập thể dục)</option>
+                                    <option value="lightly_active">Vận động nhẹ (Tập thể dục nhẹ nhàng 1-3 ngày/tuần)</option>
+                                    <option value="moderately_active">Vận động vừa (Tập luyện đều đặn 3-5 ngày/tuần)</option>
+                                    <option value="very_active">Vận động nhiều (Chơi thể thao nặng 6-7 ngày/tuần)</option>
+                                    <option value="extra_active">Vận động cực nhiều (Vận động viên, tập nặng ngày 2 lần)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <div class="col-12 text-center mt-4">
+                            <button type="submit" class="btn btn-gradient btn-lg px-5 py-3 rounded-pill shadow-lg btn-calculate">
+                                <i class="fa-solid fa-calculator me-2 animate-bounce"></i> Tính Toán Kết Quả
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Result Panel (Hidden by default, shown via JS) -->
+            <div class="glass-card p-4 p-md-5 shadow-lg mb-5 border-light-custom d-none fade-in" id="bmi-result-panel">
+                <h3 class="fw-bold mb-4 text-center text-gradient-title">Kết Quả Phân Tích Thể Trạng</h3>
+                
+                <div class="row align-items-center g-4">
+                    <!-- BMI Meter -->
+                    <div class="col-md-5 text-center">
+                        <div class="bmi-score-display mb-3">
+                            <div class="bmi-number" id="result-bmi-val">22.5</div>
+                            <div class="bmi-label text-muted">Chỉ số BMI</div>
+                        </div>
+                        <span class="badge px-4 py-2 fs-6 rounded-pill" id="result-bmi-badge">Bình thường</span>
+                    </div>
+                    
+                    <!-- BMI Scale Indicator -->
+                    <div class="col-md-7">
+                        <h5 class="fw-bold text-body-custom mb-3">Thang phân loại BMI:</h5>
+                        <div class="bmi-scale-bar mb-4">
+                            <div class="bmi-scale-section bg-info text-white" style="width: 25%;">Gầy (<18.5)</div>
+                            <div class="bmi-scale-section bg-success text-white" style="width: 35%;">Bình thường (18.5-24.9)</div>
+                            <div class="bmi-scale-section bg-warning text-dark" style="width: 25%;">Thừa cân (25-29.9)</div>
+                            <div class="bmi-scale-section bg-danger text-white" style="width: 15%;">Béo phì (>=30)</div>
+                        </div>
+                        
+                        <div class="result-details">
+                            <div class="d-flex justify-content-between border-bottom py-2">
+                                <span class="text-muted"><i class="fa-solid fa-bolt text-success-custom me-2"></i>Năng lượng duy trì (TDEE):</span>
+                                <span class="fw-bold text-body-custom"><span id="result-tdee-val">2000</span> kcal/ngày</span>
+                            </div>
+                            <div class="d-flex justify-content-between border-bottom py-2">
+                                <span class="text-muted"><i class="fa-solid fa-heart-pulse text-success-custom me-2"></i>Năng lượng cơ bản (BMR):</span>
+                                <span class="fw-bold text-body-custom"><span id="result-bmr-val">1500</span> kcal/ngày</span>
+                            </div>
+                            <div class="d-flex justify-content-between py-2">
+                                <span class="text-muted"><i class="fa-solid fa-water text-success-custom me-2"></i>Lượng nước khuyên dùng:</span>
+                                <span class="fw-bold text-body-custom"><span id="result-water-val">2.2</span> lít/ngày</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Call to Action -->
+                <div class="bg-light-custom p-4 rounded-4 mt-5 text-center">
+                    <h5 class="fw-bold text-body-custom mb-3"><i class="fa-solid fa-wand-magic-sparkles text-accent me-2"></i>Bạn muốn nhận thực đơn dinh dưỡng riêng cho mình?</h5>
+                    <p class="text-muted mb-4">Dựa trên các chỉ số này, hệ thống sẽ đề xuất các bữa ăn ngon, đủ chất và hoàn toàn nằm trong ngân sách của bạn.</p>
+                    <button class="btn btn-gradient btn-lg rounded-pill px-4" id="btn-go-recommend">
+                        <i class="fa-solid fa-utensils me-2"></i> Xây Dựng Thực Đơn Ngay
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

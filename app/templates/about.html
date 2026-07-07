@@ -1,0 +1,71 @@
+{% extends "components/base.html" %}
+
+{% block title %}Giới thiệu dự án | UTH Nutrition{% endblock %}
+
+{% block content %}
+<div class="container py-4 fade-in">
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+            <!-- Title -->
+            <div class="text-center mb-5">
+                <h2 class="fw-bold text-body-custom"><i class="fa-solid fa-circle-info text-success-custom me-2"></i>Giới Thiệu Dự Án UTH Student Nutrition</h2>
+                <p class="text-muted">Giải pháp dinh dưỡng học đường hiện đại, cân bằng chất lượng và ngân sách sinh viên.</p>
+            </div>
+            
+            <!-- Context card -->
+            <div class="glass-card p-4 p-md-5 shadow-lg border-light-custom mb-5">
+                <h4 class="fw-bold text-body-custom mb-3"><i class="fa-solid fa-graduation-cap text-success-custom me-2"></i>Bối Cảnh Dự Án</h4>
+                <p class="text-muted">
+                    Sinh viên trường **Đại học Giao thông vận tải TP.HCM (UTH)** thường xuyên đối mặt với lịch học dày đặc, các kỳ thi áp lực và cuộc sống xa nhà nhiều lo toan. Trong đó, việc duy trì một chế độ ăn uống lành mạnh, đầy đủ chất dinh dưỡng với một ngân sách tiết kiệm luôn là bài toán nan giải.
+                </p>
+                <p class="text-muted">
+                    Nhiều bạn sinh viên chọn giải pháp ăn uống nhanh, ăn qua loa tại các hàng quán lề đường giá rẻ nhưng thiếu vệ sinh, mất cân đối dinh dưỡng (nhiều tinh bột nhanh, thiếu protein, chất xơ và vitamin). Điều này trực tiếp ảnh hưởng đến sức đề kháng, khả năng học tập lâu dài.
+                </p>
+                <p class="text-muted">
+                    **UTH Student Nutrition Meal Planner** được phát triển nhằm giải quyết triệt để vấn đề này, mang lại giải pháp công nghệ đơn giản, dễ tiếp cận giúp sinh viên cân đối bữa ăn khoa học chỉ với ngân sách từ 40k đến 100k mỗi ngày.
+                </p>
+            </div>
+            
+            <!-- Features card -->
+            <div class="row g-4 mb-5">
+                <div class="col-md-6">
+                    <div class="glass-card p-4 shadow h-100 border-light-custom">
+                        <h5 class="fw-bold text-body-custom mb-3"><i class="fa-solid fa-code text-accent me-2"></i>Công Nghệ Sử Dụng</h5>
+                        <ul class="text-muted small">
+                            <li class="mb-2"><strong>Backend</strong>: Python 3.12, Flask Framework.</li>
+                            <li class="mb-2"><strong>Database</strong>: SQLite, Flask-SQLAlchemy ORM.</li>
+                            <li class="mb-2"><strong>Frontend</strong>: HTML5, CSS3 (Vanilla), Bootstrap 5, Jinja2 template.</li>
+                            <li class="mb-2"><strong>Charts</strong>: Chart.js cho sơ đồ động.</li>
+                            <li><strong>AI Integrations</strong>: Google Gemini API (hoặc local rule-based engine).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="glass-card p-4 shadow h-100 border-light-custom">
+                        <h5 class="fw-bold text-body-custom mb-3"><i class="fa-solid fa-server text-success-custom me-2"></i>Kiến Trúc Hệ Thống</h5>
+                        <p class="text-muted small mb-0">
+                            Hệ thống áp dụng kiến trúc **MVC (Model-View-Controller)** chuyên nghiệp, chia nhỏ các module:
+                            <br>- `routes/` quản lý điều hướng và API.
+                            <br>- `services/` xử lý logic tính toán BMI/TDEE, gợi ý thực đơn, chatbot AI.
+                            <br>- `models/` định nghĩa cấu trúc bảng dữ liệu.
+                            <br>- `static/` chứa assets giao diện hiện đại phong cách Food UI.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Card -->
+            <div class="bg-gradient-custom rounded-4 p-5 text-white shadow-lg text-center">
+                <h4 class="fw-bold text-white mb-3">Đồng hành cùng sức khỏe sinh viên UTH</h4>
+                <p class="text-white-50 max-width-600 mx-auto mb-4">
+                    Nếu bạn có bất kỳ câu hỏi, phản hồi hoặc ý tưởng đóng góp cho dự án, xin vui lòng liên hệ ban phát triển qua email trường.
+                </p>
+                <div class="d-flex justify-content-center gap-3">
+                    <span class="badge bg-white text-success-custom px-3 py-2 rounded-pill"><i class="fa-solid fa-envelope me-1"></i> contact@uth.edu.vn</span>
+                    <span class="badge bg-white text-success-custom px-3 py-2 rounded-pill"><i class="fa-solid fa-phone me-1"></i> (+84) 28 3899 1373</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

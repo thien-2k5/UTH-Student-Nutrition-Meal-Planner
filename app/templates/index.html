@@ -1,0 +1,125 @@
+{% extends "components/base.html" %}
+
+{% block title %}Trang chủ - Xây dựng thực đơn dinh dưỡng sinh viên UTH{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section container mb-5 fade-in">
+    <div class="row align-items-center justify-content-between g-5">
+        <div class="col-lg-6 hero-text-container">
+            <span class="badge bg-success-light text-success-custom mb-3 px-3 py-2 rounded-pill fw-bold">
+                <i class="fa-solid fa-graduation-cap me-2"></i>Dành riêng cho sinh viên UTH
+            </span>
+            <h1 class="display-4 fw-extrabold mb-3 text-gradient-title">
+                Xây dựng thực đơn dinh dưỡng sinh viên UTH
+            </h1>
+            <p class="lead text-muted mb-4">
+                Hệ thống thông minh giúp sinh viên Đại học Giao thông vận tải TP.HCM lập kế hoạch ăn uống khoa học, cân đối dinh dưỡng và tối ưu chi phí theo ngân sách mỗi ngày.
+            </p>
+            <div class="d-flex flex-wrap gap-3">
+                <a href="{{ url_for('main.bmi_page') }}" class="btn btn-gradient btn-lg px-4 py-3 rounded-pill shadow">
+                    <i class="fa-solid fa-play me-2"></i> Bắt đầu ngay
+                </a>
+                <a href="{{ url_for('main.knowledge_page') }}" class="btn btn-outline-custom btn-lg px-4 py-3 rounded-pill">
+                    <i class="fa-solid fa-book me-2"></i> Tìm hiểu kiến thức
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-6 text-center position-relative hero-img-container">
+            <div class="hero-image-backdrop"></div>
+            <!-- Standard dynamic vector element representing healthy food -->
+            <div class="glass-card p-4 shadow-lg float-card card-top-right">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="icon-circle bg-success-light text-success-custom">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <div class="text-start">
+                        <h6 class="mb-0 fw-bold">BMI chuẩn xác</h6>
+                        <small class="text-muted">Đánh giá thể trạng</small>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card p-4 shadow-lg float-card card-bottom-left">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="icon-circle bg-accent-light text-accent">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <div class="text-start">
+                        <h6 class="mb-0 fw-bold">Tiết kiệm chi phí</h6>
+                        <small class="text-muted">Chỉ từ 40.000đ/ngày</small>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-main-illustration">
+                <i class="fa-solid fa-basket-shopping display-1 text-success-custom my-5 animate-bounce"></i>
+                <div class="fs-2 fw-bold text-body-custom mt-2">Dinh Dưỡng Học Đường</div>
+                <p class="text-muted px-4">Hãy chăm sóc sức khoẻ từ những bữa ăn hàng ngày để chinh phục giảng đường UTH!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-body-custom">Tính năng nổi bật của hệ thống</h2>
+        <p class="text-muted">Cung cấp giải pháp toàn diện cho sức khỏe và túi tiền của bạn</p>
+    </div>
+    
+    <div class="row g-4 justify-content-center">
+        <!-- Feature 1 -->
+        <div class="col-md-4">
+            <div class="card h-100 hover-card border-0 glass-card p-4 shadow text-center">
+                <div class="icon-box-feature mx-auto mb-4 bg-success-light text-success-custom">
+                    <i class="fa-solid fa-calculator fs-2"></i>
+                </div>
+                <h4 class="fw-bold mb-3 text-body-custom">Tính BMI & TDEE</h4>
+                <p class="text-muted mb-0">
+                    Phân tích chi tiết chỉ số khối cơ thể (BMI) và tổng năng lượng tiêu hao mỗi ngày (TDEE) để đưa ra mục tiêu calo chuẩn khoa học.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Feature 2 -->
+        <div class="col-md-4">
+            <div class="card h-100 hover-card border-0 glass-card p-4 shadow text-center">
+                <div class="icon-box-feature mx-auto mb-4 bg-accent-light text-accent">
+                    <i class="fa-solid fa-wand-magic-sparkles fs-2"></i>
+                </div>
+                <h4 class="fw-bold mb-3 text-body-custom">Đề xuất thực đơn</h4>
+                <p class="text-muted mb-0">
+                    Gợi ý thực đơn 4 bữa mỗi ngày phù hợp với ngân sách từ bình dân tới chất lượng cao, cân đối Protein, Carb, Fat, Chất xơ và Vitamin.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Feature 3 -->
+        <div class="col-md-4">
+            <div class="card h-100 hover-card border-0 glass-card p-4 shadow text-center">
+                <div class="icon-box-feature mx-auto mb-4 bg-success-light text-success-custom">
+                    <i class="fa-solid fa-robot fs-2"></i>
+                </div>
+                <h4 class="fw-bold mb-3 text-body-custom">Trợ lý AI Chatbot</h4>
+                <p class="text-muted mb-0">
+                    Tư vấn trực tiếp 24/7. Hỗ trợ nhận diện các thông tin thể chất nhanh chóng thông qua tin nhắn tự nhiên để trả kết quả dinh dưỡng.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats / Banner Section -->
+<section class="container py-4 my-5 bg-gradient-custom rounded-4 p-5 text-white shadow-lg banner-uth">
+    <div class="row align-items-center justify-content-between">
+        <div class="col-md-8 text-center text-md-start mb-3 mb-md-0">
+            <h3 class="fw-bold mb-2 text-white">Bạn đang băn khoăn về ngân sách ăn uống hôm nay?</h3>
+            <p class="mb-0 text-white-50">Đừng lo lắng, chúng tôi đã tổng hợp hơn 100 món ăn Việt Nam quen thuộc giá cực kỳ sinh viên để giúp bạn lên thực đơn!</p>
+        </div>
+        <div class="col-md-4 text-center text-md-end">
+            <a href="{{ url_for('main.recommend_page') }}" class="btn btn-light text-success-custom fw-bold px-4 py-3 rounded-pill shadow-sm">
+                <i class="fa-solid fa-search me-2"></i> Tra cứu món ăn
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
