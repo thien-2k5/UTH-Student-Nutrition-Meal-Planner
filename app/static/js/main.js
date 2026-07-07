@@ -210,7 +210,11 @@ document.addEventListener('DOMContentLoaded', function () {
             if (data.success) {
                 currentRecMenu = data;
                 renderMealPlanDashboard(data);
-                showToast("Tạo thực đơn thành công!", "success");
+                if (data.warning) {
+                    showToast(data.warning, "warning");
+                } else {
+                    showToast("Tạo thực đơn thành công!", "success");
+                }
             } else {
                 showToast(data.error || "Không tìm thấy thực đơn phù hợp.", "error");
             }
@@ -227,9 +231,9 @@ document.addEventListener('DOMContentLoaded', function () {
         resultPanel.classList.remove('d-none');
         
         // Fill header metrics
-        document.getElementById('metric-bmi-class').textContent = data.classification;
-        document.getElementById('metric-tdee').textContent = Math.round(data.tdee).toLocaleString('vi-VN');
-        document.getElementById('metric-target-calories').textContent = Math.round(data.target_calories).toLocaleString('vi-VN');
+        document.getElementById('metric-bmi-class').textContent = data.classification || 'Bình thường';
+        document.getElementById('metric-tdee').textContent = Math.round(data.tdee || 0).toLocaleString('vi-VN');
+        document.getElementById('metric-target-calories').textContent = Math.round(data.target_calories || 0).toLocaleString('vi-VN');
         
         // Render food cards
         const cardsGrid = document.getElementById('menu-cards-grid');
@@ -244,6 +248,9 @@ document.addEventListener('DOMContentLoaded', function () {
         
         meals.forEach(m => {
             const food = data[m.key];
+            if (!food) {
+                return;
+            }
             const col = document.createElement('div');
             col.className = 'col-md-6 col-xl-3 fade-in';
             col.innerHTML = `

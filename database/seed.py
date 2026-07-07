@@ -64,6 +64,8 @@ def seed_database():
         ("Nui sườn non củ cải", 30000, 18.5, 11.0, 54.0, 2.2, "B3, Sắt, C", 390, "Sáng"),
         ("Yến mạch pha sữa đặc trái cây", 18000, 9.0, 7.0, 62.0, 5.5, "B1, B5, B6, Xơ hòa tan", 350, "Sáng"),
         ("Nui xào trứng xúc xích", 20000, 13.8, 12.5, 48.0, 1.5, "A, B12, D", 360, "Sáng"),
+        ("Bánh mì chả cá tươi", 18000, 15.0, 9.0, 40.0, 2.2, "B12, C", 330, "Sáng"),
+        ("Bún thang gà thanh đạm", 32000, 24.0, 10.0, 55.0, 2.8, "B3, B6, Sắt", 410, "Sáng"),
 
         # === BỮA TRƯA / TỐI (Category: "Trưa/Tối") ===
         ("Cơm tấm sườn nướng mật ong", 30000, 24.5, 14.0, 68.0, 1.8, "B1, B3, B6", 510, "Trưa/Tối"),
@@ -116,6 +118,8 @@ def seed_database():
         ("Bún kèn Phú Quốc ngon thơm nước cốt dừa", 35000, 18.5, 15.0, 65.0, 2.8, "Kali, Sắt, B12", 470, "Trưa/Tối"),
         ("Mì Quảng gà trứng cút đậu phộng", 30000, 22.5, 13.0, 58.0, 2.5, "B3, B12, Sắt, E", 440, "Trưa/Tối"),
         ("Hủ tiếu chay đậu hũ nấm rơm rau củ", 20000, 9.5, 6.0, 64.0, 4.0, "Canxi, Kali, C", 350, "Trưa/Tối"),
+        ("Cơm chiên trứng thịt bằm", 22000, 16.0, 12.0, 72.0, 2.0, "B1, B12", 470, "Trưa/Tối"),
+        ("Mì tôm xào rau cải", 18000, 13.0, 10.0, 60.0, 3.0, "B3, C", 390, "Trưa/Tối"),
 
         # === ĂN VẶT / PHỤ (Category: "Ăn vặt") ===
         ("Trứng gà luộc (1 quả)", 5000, 6.3, 5.3, 0.6, 0.0, "A, B12, D, E", 75, "Ăn vặt"),
@@ -139,6 +143,8 @@ def seed_database():
         ("Chè mè đen nước cốt dừa (chè sủi)", 10000, 3.5, 6.5, 36.0, 2.8, "Canxi, Magie, E", 215, "Ăn vặt"),
         ("Chè đậu xanh đánh nước cốt dừa", 10000, 5.0, 4.5, 42.0, 3.5, "B1, B9, Sắt, Kali", 225, "Ăn vặt"),
         ("Đậu nành edamame luộc muối (100g)", 15000, 11.0, 5.0, 10.0, 5.0, "K, Folate, Sắt, Canxi", 130, "Ăn vặt"),
+        ("Bánh flan caramel", 8000, 5.0, 7.0, 24.0, 0.0, "D, Canxi", 160, "Ăn vặt"),
+        ("Trà xanh không đường", 6000, 0.0, 0.0, 2.0, 0.0, "Polyphenol", 5, "Nước uống"),
 
         # === NƯỚC UỐNG (Category: "Nước uống") ===
         ("Sữa đậu nành UTH tự nấu", 6000, 6.5, 4.0, 12.0, 1.5, "B1, B2, E, Phytoestrogen", 110, "Nước uống"),

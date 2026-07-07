@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 # Paths
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 DB_DIR = BASE_DIR / "database"
 DB_DIR.mkdir(exist_ok=True)
 

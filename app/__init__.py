@@ -3,6 +3,7 @@ from flask import Flask, render_template
 import logging
 from app.config import Config
 from app.database import db
+from database.seed import seed_database
 
 logger = logging.getLogger(__name__)
 
@@ -38,6 +39,10 @@ def create_app(config_class=Config):
     with app.app_context():
         try:
             db.create_all()
+            from app.models.food import Food
+            if db.session.query(Food).count() == 0:
+                logger.info("No food data found. Seeding default menu database...")
+                seed_database()
             logger.info("Database tables verified/created successfully.")
         except Exception as e:
             logger.error(f"Error creating database tables: {str(e)}")

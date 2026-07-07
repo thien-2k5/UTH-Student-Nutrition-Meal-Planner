@@ -46,6 +46,9 @@ NUTRITION_ANSWERS = {
     "uong bao nhieu nuoc": "Uống đủ nước giúp thanh lọc cơ thể, giảm mệt mỏi và tập trung học tập. Công thức: Cân nặng (kg) x 0.04 = Số lít nước cần uống mỗi ngày (ví dụ 50kg cần khoảng 2 lít nước). Hãy mang theo bình nước cá nhân khi lên giảng đường UTH nhé!",
     "bmi": "BMI (Body Mass Index) là Chỉ số khối cơ thể. Công thức = Cân nặng (kg) / [Chiều cao (m) * Chiều cao (m)]. Phân loại: Gầy (<18.5), Bình thường (18.5-24.9), Thừa cân (25-29.9), Béo phì (>=30). Bạn muốn mình tính BMI giúp không? Hãy nhắn chiều cao và cân nặng nhé!",
     "tdee": "TDEE (Total Daily Energy Expenditure) là tổng năng lượng cơ thể tiêu hao trong một ngày, bao gồm cả các hoạt động thể chất và tiêu hóa. TDEE quyết định việc bạn cần ăn bao nhiêu calo để tăng, giảm hoặc duy trì cân nặng.",
+    "goi y mon an": "Mình có thể gợi ý thực đơn ăn uống phù hợp với BMI, TDEE và ngân sách của bạn. Hãy gửi chiều cao, cân nặng, tuổi, giới tính và ngân sách mỗi ngày để mình đề xuất 4 bữa hợp lý nhé!",
+    "thuc don": "Mình có thể gợi ý thực đơn ăn uống phù hợp với BMI, TDEE và ngân sách của bạn. Hãy gửi chiều cao, cân nặng, tuổi, giới tính và ngân sách mỗi ngày để mình đề xuất 4 bữa hợp lý nhé!",
+    "de xuat mon an": "Mình có thể gợi ý thực đơn ăn uống phù hợp với BMI, TDEE và ngân sách của bạn. Hãy gửi chiều cao, cân nặng, tuổi, giới tính và ngân sách mỗi ngày để mình đề xuất 4 bữa hợp lý nhé!",
     "uth": "Chào người bạn UTH! Trường Đại học Giao thông vận tải TP.HCM nổi tiếng với tinh thần năng động. Học tập tại UTH đòi hỏi nhiều năng lượng, hãy để mình đồng hành giúp bạn ăn uống khoa học, tiết kiệm và khỏe mạnh nhé!",
     "cam on": "Không có gì nè! Chúc bạn học tập thật tốt tại UTH và luôn giữ gìn sức khỏe dinh dưỡng nhé!",
     "thanks": "Không có gì nè! Chúc bạn học tập thật tốt tại UTH và luôn giữ gìn sức khỏe dinh dưỡng nhé!"
